@@ -2538,6 +2538,10 @@ hr {
 	.carousel-btn {
 		top: 400px;
 	}
+
+	.carousel-controls {
+		top: 360px;
+	}
 }
 
 /* --- START MERGED NAVBAR CSS --- */
