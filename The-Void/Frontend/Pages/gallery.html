@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Void</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/The-Void/Frontend/Styles/gallery.css">
+<link rel="icon" type="image/svg+xml" href="/The-Void/Frontend/favicon.svg">
+</head>
+<body>
+
+     <!-- START MERGED NAVBAR -->
+    <div id="merged-navbar-container">
+        <header id="myHeader">
+            <!-- Desktop Logo -->
+            <a href="/The-Void/Frontend/index.html" class="desktop-logo-link">
+                <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                    <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+                </svg>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="desktop-nav">
+              <a href="/The-Void/Frontend/index.html">Home</a>
+              <a href="/The-Void/Frontend/Pages/aboutus.html">About Us</a>
+              <a href="/The-Void/Frontend/Pages/news.html">News</a>
+              <a href="/The-Void/Frontend/Pages/diary.html">Diary</a>
+              <a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a>
+              <a href="/The-Void/Frontend/Pages/mission.html">Missions</a>
+              <a href="/The-Void/Frontend/Pages/login.html">Login</a>
+                <button id="openmenu">
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Mobile Logo -->
+            <a href="/The-Void/Frontend/index.html" class="mobile-logo-link">
+                 <svg id="mobile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                    <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+                </svg>
+            </a>
+        </header>
+
+        <!-- Mobile Sidebar -->
+        <div id="mobile-sidebar">
+            <nav class="mobile-nav-links">
+              <a href="/The-Void/Frontend/index.html">Home</a>
+              <a href="/The-Void/Frontend/Pages/aboutus.html">About Us</a>
+              <a href="/The-Void/Frontend/Pages/news.html">News</a>
+              <a href="/The-Void/Frontend/Pages/diary.html">Diary</a>
+              <a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a>
+              <a href="/The-Void/Frontend/Pages/mission.html">Missions</a>
+              <a href="/The-Void/Frontend/Pages/login.html">Login</a>
+            </nav>
+        </div>
+        
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay"></div>
+    </div>
+    <!-- END MERGED NAVBAR -->
+
+    <!--First section -->
+    <section class="main-page">
+        <video autoplay muted loop playinline class="main-page-video">
+            <source src="/The-Void/Frontend/images/main-page-video.mp4" type="video/mp4"> 
+        </video>
+
+        <!--Dark Overlay-->
+        <div class="video-overlay"></div>
+
+        <div class="main-page-content">
+            <h1 class="main-title">The Void Gallary</h1>
+            <p class="main-subtitle"><b>Saving Our Journey Through The Void</b></p>
+        </div>
+    </section>
+
+        <!-- Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+       
+<div class="container">
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="brand">
+        <div class="logo">
+                <svg id="logo10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                    <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+                </svg>
+        </div>
+        <div>
+          <div style="font-size:13px;color:#ffffff;font-weight:700;">The Void Gallery</div>
+          <div style="font-size:12px;color:#ffffff;">Your desired browser gallery</div>
+        </div>
+      </div>
+
+      <h1 class="title">Share the Cosmos in your Photos</h1>
+      <div class="subtitle">
+        From moons to motors, upload your cosmic visuals. All images are saved locally and displayed instantly in our dynamic gallery.
+      </div>
+      <p style="color:var(--muted); margin-top:14px; max-width:680px;">
+        Click any image to view details, edit metadata, replace the image or delete it. Use search and category filters to quickly find images.
+      </p>
+    </div>
+
+    <div class="upload-card" aria-labelledby="upload-heading">
+      <h3 id="upload-heading">Upload Space Image</h3>
+      <p>Choose file, drop image, paste image URL or use the upload button. Add Title, Description and Category.</p>
+
+      <div style="display:flex;gap:10px;align-items:center;">
+        <button id="chooseBtn" class="choose">Choose Image</button>
+        <input id="fileInput" type="file" accept="image/*" style="display:none">
+      </div>
+
+      <div id="dropArea" class="drop" tabindex="0">Drop image here, paste URL (Ctrl+V) or click Choose</div>
+
+      <div class="inputs">
+        <input id="title" type="text" placeholder="Name / Title (e.g. Saturn Rings)" />
+        <select id="category" class="half">
+          <option>Planet</option>
+          <option>Moon</option>
+          <option>Star</option>
+          <option>Rocket</option>
+          <option>Astronaut</option>
+          <option>Other</option>
+        </select>
+        <textarea id="description" placeholder="Short Description (Optional)"></textarea>
+      </div>
+
+      <div class="upload-actions">
+        <button id="uploadBtn" class="btn primary">Upload</button>
+        <button id="clearBtn" class="btn ghost">Clear</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="controls-left">
+      <input id="search" class="search" placeholder="Search title or description..." />
+      <select id="filter" class="filter">
+        <option value="">All categories</option>
+        <option>Planet</option>
+        <option>Moon</option>
+        <option>Star</option>
+        <option>Rocket</option>
+        <option>Astronaut</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="count"><span id="totalCount">0</span> images</div>
+  </div>
+
+  <!-- Masonry gallery -->
+  <div id="masonry" class="masonry" aria-live="polite"></div>
+</div>
+
+<!-- Modal -->
+<div id="modalWrap" class="modal-wrap" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal" role="document" aria-labelledby="modalTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f4fb;">
+      <strong id="modalTitle" style="font-size:16px;color:#0b1020">Details</strong>
+      <button id="closeModal" style="background:transparent;border:none;font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <div class="modal-inner">
+      <div>
+        <img id="modalImage" src="" alt="Preview" />
+      </div>
+      <div class="side">
+        <div class="tag" id="modalCategoryDisplay">Category</div>
+        <div style="color:#464849;font-size:13px;margin-top:8px" id="modalCreated">Time</div>
+
+        <label for="editTitle">Name / Title</label>
+        <input id="editTitle" type="text" style="color: black;"/>
+
+        <label for="editDesc">Description</label>
+        <textarea id="editDesc" style="color: black;"></textarea>
+
+        <label for="editCategory">Category</label>
+        <select id="editCategory" style="color: black;">
+          <option>Planet</option>
+          <option>Moon</option>
+          <option>Star</option>
+          <option>Rocket</option>
+          <option>Astronaut</option>
+          <option>Other</option>
+        </select>
+
+    <label for="replaceFile" style="
+        font-size: 14px; 
+        font-weight: 600; 
+        color: #374151; 
+        margin-left: 1px;
+    ">
+        Replace image
+    </label>
+
+    <input id="replaceFile" type="file" accept="image/*" style="
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        color: #4b5563;
+        background-color: #fff;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        outline: none;
+    " />
+
+        <div class="row" style="margin-top:12px">
+          <button id="saveBtn" class="btn-save">Save</button>
+          <button id="deleteBtn" class="btn-del">Delete</button>
+          <button id="downloadBtn" class="btn-download">Download</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!-- Footer -->
+ <footer>
+    <!-- Main container for footer content -->
+    <div class="row1">
+        <!-- First column: About Void -->
+        <div class="col1">
+        <a href="/The-Void/Frontend/index.html"><svg id="logo-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+            <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+        </svg></a>
+            <p>The Void Dynamics, a french aerospace pogram is engineering the technology for a multi-planetary future. We build the systems that will take humanity beyond the horizon. <b>Join the mission</b>.</p>
+        </div>
+
+        <!-- Second column: Office details -->
+        <div class="col1">
+            <h3>Office 
+                <div class="underline"><span></span></div>
+            </h3>
+            <p>United Arab Emirates</p>
+            <p>Dubai, Business Bay</p>
+            <p>Burj Khalifa Building</p>
+            <p class="support">Email: support@void.com</p>
+            <h4>Phone: +971 56 8387374</h4>
+        </div>
+
+        <!-- Third column: Navigation links -->
+        <div class="col1">
+            <h3>Links 
+                <div class="underline"><span></span></div>
+            </h3>
+            <ul class="king">
+                <li><a href="/The-Void/Frontend/index.html">Home</a></li>
+                <li><a href="/The-Void/Frontend/Pages/aboutus.html">About us</a></li>
+                <li><a href="/The-Void/Frontend/Pages/news.html">News</a></li>
+                <li><a href="/The-Void/Frontend/Pages/diary.html">Diary</a></li>
+                <li><a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a></li>
+                <li><a href="/The-Void/Frontend/Pages/mission.html">Mission</a></li>
+                <li><a href="/The-Void/Frontend/Pages/login.html">Login / signup</a></li>
+            </ul>
+        </div>
+
+        <!-- Fourth column: Newsletter subscription -->
+        <div class="col1">
+            <h3>Newsletter 
+                <div class="underline"><span></span></div>
+            </h3>
+            <!-- Newsletter subscription form -->
+            <form class="news">
+                <i class="fa-regular fa-envelope"></i>
+                <input class="Newsletter" type="email" placeholder="Enter your email id" required>
+                <button class="Subscribe" type="submit">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Social media icons -->
+            <div class="apps">
+                <a href="https://www.facebook.com/mohammed.fais.98622"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/5aisal.me/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/mohammed-faisal-169824280/"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/mohamfaisal"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Horizontal line to separate footer content from copyright -->
+    <hr>
+
+    <!-- Copyright notice -->
+    <p class="copyright">© 2025 Void. All rights reserved by Faisal.</p>
+ </footer>
+
+ <div id="logout-modal" class="notification-overlay">
+  <div class="notification-box">
+    <h3>End Session?</h3>
+    <p>Are you sure you want to disconnect from the Void</p>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="logout-cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="logout-confirm-btn" class="btn-primary">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+<div id="delete-modal" class="notification-overlay" style="z-index: 10001;">
+  <div class="notification-box">
+    <h3 style="color: #ff4d4d;">⚠ DELETE IMAGE ⚠</h3>
+    <p>Are you sure you want to delete this image?<br>It will be lost in the void forever.</p>
+    
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="del-cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="del-confirm-btn" class="btn-primary" 
+                style="background: linear-gradient(135deg, #ff4d4d, #cc0000); box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);">
+            CONFIRM DELETE
+        </button>
+    </div>
+  </div>
+</div>
+
+<script src="/The-Void/Frontend/JavaScripts/gallery.js"></script>
+</body>
+</html>

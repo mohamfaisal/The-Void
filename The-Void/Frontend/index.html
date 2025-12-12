@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Void</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="Styles/style.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+</head>
+<body>
+<!-- START MERGED NAVBAR -->
+<div id="merged-navbar-container">
+    <header id="myHeader">
+        
+        <!-- Desktop Logo -->
+        <a href="index.html" class="desktop-logo-link">
+            <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+            </svg>
+        </a>
+        
+        <!-- Desktop Nav -->
+        <nav class="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="Pages/aboutus.html">About Us</a>
+            <a href="Pages/news.html">News</a>
+            <a href="Pages/diary.html">Diary</a>
+            <a href="Pages/gallery.html">Gallery</a>
+            <a href="Pages/mission.html">Missions</a>
+            <a href="Pages/login.html">Login</a>
+            <button id="openmenu">
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Mobile Logo -->
+        <a href="index.html" class="mobile-logo-link">
+             <svg id="mobile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+            </svg>
+        </a>
+
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar">
+        <nav class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="Pages/aboutus.html">About Us</a>
+            <a href="Pages/news.html">News</a>
+            <a href="Pages/diary.html">Diary</a>
+            <a href="Pages/gallery.html">Gallery</a>
+            <a href="Pages/mission.html">Missions</a>
+            <a href="Pages/login.html">Login</a>
+        </nav>
+    </div>
+    
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay"></div>
+</div>
+<!-- END MERGED NAVBAR -->
+
+<!-- START NEW HERO SECTION -->
+<section id="new-hero-section">
+    <div id="WebGL-output"></div>
+
+    <img class="planetImg" src="https://assets.codepen.io/1651485/planet.png" alt="Planet" />
+
+    <div class="mainText">
+        <div class="mainTitle">
+            BEYOND THE COLORFUL HORIZON
+        </div>
+        <div class="subTitle">
+            Engineering the autonomous systems for a multi-planetary future.
+        </div>
+        <a href="Pages/diary.html" class="cta-button">Explore Depths</a>
+    </div>
+            <!-- Navigation -->
+        <a href="#about" class="nav-btn-next" title="Next Section">
+            <div class="pyramid">
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-base"></div>
+                <span class="pyramid-inner">▼</span>
+            </div>
+        </a>
+</section>
+<!-- END NEW HERO SECTION -->
+
+    <!-- Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Hero Section with Parallax Layers -->
+    <div class="hero-container" id="hero">
+        <!-- Grid Overlay -->
+        <div class="grid-overlay">
+            <div class="grid-diagonal-1"></div>
+            <div class="grid-diagonal-2"></div>
+        </div>
+
+        <!-- Background Layer -->
+        <div class="parallax-layer layer-bg"></div>
+        
+        <!-- Floating Elements Layer -->
+        <div class="parallax-layer layer-float">
+            <!-- Bottom Left Rectangle Group -->
+            <div class="rectangles-bottom-left">
+                <div class="rect rect-bl-1"></div>
+                <div class="rect rect-bl-2"></div>
+                <div class="rect rect-bl-3"></div>
+                <div class="rect rect-bl-4"></div>
+                <div class="rect rect-bl-5"></div>
+                <div class="rect rect-bl-6"></div>
+            </div>
+            
+            <!-- Top Right Rectangle Group -->
+            <div class="rectangles-top-right">
+                <div class="rect rect-tr-1"></div>
+                <div class="rect rect-tr-2"></div>
+                <div class="rect rect-tr-3"></div>
+                <div class="rect rect-tr-4"></div>
+            </div>
+        </div>
+        
+        <!-- Foreground Layer -->
+        <div class="parallax-layer layer-fg">
+            <div class="glowing-orb orb-1"></div>
+            <div class="glowing-orb orb-2"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">THE ODYSSEY FLEET</h1>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="content-section section-gradient" id="about">
+        <div class="container">
+            <h2 class="section-title">OUR MISSION</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>DESIGNING MULTI-PLANETARY HUMANITY</h3>
+                    <p>The Void Dynamics was founded by the groups of  "l'appel du vide" from the France origin aerospace program. Our goal is to drastically reduce the cost of access to space through rapid reusability and autonomous flight systems.</p>
+                    <p>We believe the future of humanity lies in the stars, and we are building the technology to take us there.</p>
+                    
+                    <div class="about-boxes">
+                        <div class="info-box">
+                            <div class="box-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" stroke-width="2" class="ai ai-ReduxFill"><g clip-path="url(#clip0_950_630)"><path d="M16.63 16.563c.885-.092 1.557-.863 1.527-1.788a1.723 1.723 0 0 0-1.71-1.665h-.062c-.947.03-1.68.832-1.65 1.788.032.463.215.863.49 1.14-1.039 2.067-2.627 3.577-5.01 4.841-1.618.864-3.298 1.172-4.977.956-1.375-.185-2.444-.802-3.116-1.819-.977-1.51-1.068-3.145-.244-4.779.58-1.171 1.497-2.035 2.077-2.466-.122-.401-.305-1.08-.397-1.573C-.871 14.436-.412 18.814.93 20.88c1.008 1.542 3.054 2.498 5.315 2.498.61 0 1.221-.062 1.832-.216 3.91-.77 6.872-3.114 8.552-6.598zm5.375-3.823c-2.321-2.744-5.742-4.255-9.651-4.255h-.489a1.677 1.677 0 0 0-1.496-.925h-.062c-.946.031-1.68.833-1.649 1.789.03.925.794 1.664 1.71 1.664h.062a1.721 1.721 0 0 0 1.496-1.048h.55c2.321 0 4.52.678 6.505 2.004 1.527 1.018 2.627 2.343 3.237 3.947.52 1.294.49 2.558-.06 3.638-.856 1.634-2.291 2.528-4.185 2.528-1.221 0-2.382-.37-2.993-.648a18.07 18.07 0 0 1-1.374 1.11c1.313.617 2.657.956 3.94.956 2.932 0 5.1-1.634 5.925-3.268.885-1.788.824-4.871-1.466-7.492zM6.49 17.087c.03.925.794 1.665 1.71 1.665h.061c.947-.03 1.68-.832 1.65-1.788a1.723 1.723 0 0 0-1.71-1.665h-.062c-.061 0-.153 0-.214.03-1.252-2.096-1.771-4.377-1.588-6.844.122-1.85.733-3.453 1.802-4.779.886-1.14 2.596-1.695 3.757-1.726 3.237-.062 4.611 4.008 4.703 5.642.397.092 1.069.308 1.527.462C17.759 3.09 14.706.5 11.773.5 9.025.5 6.49 2.504 5.482 5.464c-1.405 3.946-.489 7.738 1.222 10.729-.153.216-.245.555-.214.894z"/></g><defs><clipPath id="clip0_950_630"><rect width="24" height="24"/></clipPath></defs></svg>
+                                <span class="box-number">1</span>
+                            </div>
+                            <h4 class="box-title">Reusiblity</h4>
+                            <p class="box-description">Our 'Odyssey' rockets can fly, land, and refly in under 48 hours, a new standard for the industry.</p>
+                        </div>
+                        <div class="info-box">
+                            <div class="box-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ai ai-Planet"><circle cx="12" cy="12" r="8"/><path d="M8.399 4.849C5.372 2.582 2.972 1.489 2.23 2.23c-1.174 1.174 2.248 6.5 7.643 11.895 5.396 5.395 10.722 8.817 11.895 7.643.431-.43.243-1.421-.435-2.769"/></svg>
+                                <span class="box-number">2</span>
+                            </div>
+                            <h4 class="box-title">AUTONOMY</h4>
+                            <p class="box-description">From launch to landing, our AI-driven flight control ensures mission success with or without ground control.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="orbit-container">
+                        <div class="orbit orbit-1">
+                            <div class="orbit-dot dot-1"></div>
+                        </div>
+                        <div class="orbit orbit-2">
+                            <div class="orbit-dot dot-2"></div>
+                        </div>
+                        <div class="orbit orbit-3">
+                            <div class="orbit-dot dot-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <a href="#new-hero-section" class="nav-btn-prev" title="Previous Section">
+            <div class="hexagon">
+                <span class="hex-content">▲</span>
+            </div>
+        </a>
+        <a href="#features" class="nav-btn-next" title="Next Section">
+            <div class="pyramid">
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-base"></div>
+                <span class="pyramid-inner">▼</span>
+            </div>
+        </a>
+    </section>
+
+    <!-- Features Section with 3D Carousel -->
+    <section class="content-section features-section-bg" id="features">
+        <!-- Grid Overlay -->
+        <div class="features-grid-overlay">
+            <div class="features-grid"></div>
+            <div class="features-grid-large"></div>
+        </div>
+        
+        <div class="container">
+            <h2 class="section-title">Layered Features</h2>
+            <div class="features-container">
+                <div class="carousel-3d" id="carousel">
+                    <div class="feature-card-3d" data-index="0">
+                        <span class="feature-number">01</span>
+                        <div class="feature-icon-3d"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path fill="#ffffff" d="M2 1h4v1H5v1h1v1h1V3h1v3H7V5H6v2H4L3 6H2V5H1v1H0V2h1v1h2V2H2"/></svg></div>
+                        <h3 class="feature-title-3d">THE PULSAR ENGINE</h3>
+                        <p class="feature-description-3d">Our full-flow staged combustion engine, 3D printed at Dassault aerospace advanced manufacturing lab</p>
+                    </div>
+                    <div class="feature-card-3d" data-index="1">
+                        <span class="feature-number">02</span>
+                        <div class="feature-icon-3d"><svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="#ffffff" d="M6.5 1a.5.5 0 0 0 0 1H7v3.832L4.1 9.699a.5.5 0 0 0 .498.791l2.45-.49h1.903l2.451.49a.5.5 0 0 0 .498-.79L9 5.831V2h.5a.5.5 0 0 0 0-1zM7 7.502V9a.5.5 0 0 0-.098.01l-1.216.244zm2 0l1.314 1.752l-1.216-.244A.5.5 0 0 0 9 9zm-1 3.5a1.5 1.5 0 0 0-.965.35a1.504 1.504 0 0 0-.334 1.898l.865 1.5a.5.5 0 0 0 .868 0l.865-1.5a1.504 1.504 0 0 0-.334-1.898a1.5 1.5 0 0 0-.965-.35"/></svg></div>
+                        <h3 class="feature-title-3d">AUTONOMOUS LANDING</h3>
+                        <p class="feature-description-3d">A revolutionary AI-driven guidance system that lands our boosters on land or at sea with pinpoint accuracy.</p>
+                    </div>
+                    <div class="feature-card-3d" data-index="2">
+                        <span class="feature-number">03</span>
+                        <div class="feature-icon-3d"><svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 32 32"><path fill="#ffffff" d="M24 23h2v8h-2zm4-2h2v10h-2zm-8 6h2v4h-2zm-2-7v-2h1v-7h-1V9h4v2h-1v7h1v2zm-3.5 0h2L13 9h-3L6.503 20h2l.601-2h4.778zm-4.794-4l1.628-5.411l.256-.003L13.264 16z"/><path fill="#ffffff" d="M17 30H0V0h30v17h-2V2H2v26h15z"/></svg></div>
+                        <h3 class="feature-title-3d">DEEP SPACE AI</h3>
+                        <p class="feature-description-3d">Next-generation navigation AI that can pilot missions to Mars and beyond without human intervention.</p>
+                    </div>
+                    <div class="feature-card-3d" data-index="3">
+                        <span class="feature-number">04</span>
+                        <div class="feature-icon-3d"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64"><path fill="#ffffff" d="M47.208 13.072c-.908.092-2.261.193-3.728.193c-1.54 0-2.891-.113-4.016-.341c-3.035-.612-5.988-2.577-7.467-3.683c-1.477 1.105-4.426 3.068-7.463 3.683c-1.126.228-2.477.341-4.017.341c-1.463 0-2.819-.104-3.723-.193c-1 2.52-3.39 9.775-1.947 18.683C16.692 43.158 28.734 52.495 32 54.839c3.267-2.344 15.309-11.681 17.152-23.084c1.44-8.907-.944-16.161-1.944-18.683m-17.873-.066a26.697 26.697 0 0 0 2.664-1.592a26.699 26.699 0 0 0 2.669 1.592v11.279h-5.333V13.006m5.333 37.465A57.213 57.213 0 0 1 32 52.637a59.734 59.734 0 0 1-2.665-2.164V31.344h5.333v19.127m12.872-20.01H16.461a34.072 34.072 0 0 1-.276-5.294h31.629a34.19 34.19 0 0 1-.274 5.294"/><path fill="#ffffff" d="M52.445 8.325a3.373 3.373 0 0 0-3.037-1.883c-.162 0-.325.011-.486.034c-.02.004-2.164.305-4.539.305c-1.328 0-2.453-.092-3.343-.271c-3.226-.65-6.795-3.664-6.831-3.694a3.401 3.401 0 0 0-4.416-.001c-.035.029-3.609 3.044-6.831 3.694c-.891.18-2.016.271-3.344.271c-2.383 0-4.519-.301-4.54-.305a3.601 3.601 0 0 0-.481-.033a3.381 3.381 0 0 0-3.039 1.877c-.539 1.108-5.127 11.043-2.998 24.22c2.651 16.37 20.813 28.404 21.585 28.908a3.392 3.392 0 0 0 3.712-.002c.771-.503 18.938-12.539 21.585-28.905c2.195-13.567-2.784-23.787-2.997-24.215m1.243 23.935c-2.526 15.612-20.063 27.226-20.81 27.713a1.606 1.606 0 0 1-1.755 0c-.747-.487-18.279-12.101-20.808-27.713c-2.1-12.997 2.636-22.746 2.834-23.155a1.618 1.618 0 0 1 1.672-.881c.022.003 2.275.322 4.796.322c1.449 0 2.693-.104 3.698-.307c3.71-.748 7.599-4.054 7.638-4.087a1.616 1.616 0 0 1 2.097 0c.038.033 3.921 3.339 7.636 4.087c1.005.203 2.246.307 3.697.307c2.521 0 4.771-.319 4.795-.322a1.616 1.616 0 0 1 1.672.881c.204.409 4.939 10.158 2.838 23.155"/><ellipse cx="32.001" cy="6.523" fill="#ffffff" rx="1.228" ry="1.236"/><ellipse cx="48.771" cy="10.852" fill="#ffffff" rx="1.229" ry="1.237"/><ellipse cx="51.838" cy="22.487" fill="#ffffff" rx="1.228" ry="1.237"/><ellipse cx="50.032" cy="36.987" fill="#ffffff" rx="1.228" ry="1.237"/><ellipse cx="42.647" cy="48.316" fill="#ffffff" rx="1.229" ry="1.237"/><circle cx="32" cy="57.353" r="1.234" fill="#ffffff"/><ellipse cx="21.354" cy="48.316" fill="#ffffff" rx="1.227" ry="1.237"/><ellipse cx="13.966" cy="36.988" fill="#ffffff" rx="1.229" ry="1.236"/><ellipse cx="12.162" cy="22.487" fill="#ffffff" rx="1.228" ry="1.237"/><ellipse cx="15.177" cy="10.852" fill="#ffffff" rx="1.228" ry="1.237"/></svg></div>
+                        <h3 class="feature-title-3d">VOID-FIELD SHIELDING</h3>
+                        <p class="feature-description-3d">A patented quantum field that shields crews and cargo from deep-space radiation and micrometeoroid threats during interstellar travel.</p>
+                    </div>
+                    <div class="feature-card-3d" data-index="4">
+                        <span class="feature-number">05</span>
+                        <div class="feature-icon-3d"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 128 128"><path fill="#2F7889" d="M51.24 75.33S3.98 57.62 4 57.25L5.12 23.6c.02-.45.47-.75.89-.59l46.35 17.12c.38.14.62.51.61.91l-1.13 33.9c-.01.3-.31.5-.6.39z"/><path fill="#37474F" d="m9.29 59.89l41.95 15.44c.28.11.59-.09.6-.4l1.13-33.9l-7.57-2.85L9.29 59.89z"/><path fill="none" stroke="#9DD4E0" stroke-miterlimit="10" stroke-width="2.042" d="M51.24 75.33L4.55 58.08a.854.854 0 0 1-.55-.82L5.12 23.6c.02-.45.47-.75.89-.59l46.35 17.12c.38.14.62.51.61.91l-1.13 33.9c-.01.3-.31.5-.6.39z"/><path fill="none" stroke="#9DD4E0" stroke-miterlimit="10" stroke-width="1.021" d="M52.41 57.96L4.57 40.27m24.97-7.56l-1.17 34.02M16.94 27.39l-1.06 35.2m26.14-26.64l-1.06 35.44"/><path fill="#BF8904" d="m82.81 38.76l1.46-2.49c.59-1.01 1.82-1.5 2.93-1.13c2.04.68 5.21 2.43 7.46 6.88c2.27 4.49 1.93 8.12 1.37 10.17a2.53 2.53 0 0 1-2.38 1.88l-2.04.04l-8.8-15.35z"/><path fill="#875D00" d="M91.15 40.25c-.63.82.08 4.67-.76 5.61c-.42.46-1.01.9-1.58.65l2.29 7.61l2.57-.04a2.51 2.51 0 0 0 2.38-1.88c.55-2.05.9-5.68-1.37-10.17c-.3-.57-2.06-3.71-3.53-1.78z"/><path fill="#FFCA28" d="M89.28 41.23L68.9 33.46l-21.19 9.97L53.65 86l22.18-9.48l16.91-13.77z"/><path fill="#E2A610" d="m89.28 41.22l-21.33 9.92l-14.1 35.25l22.18-9.48l16.91-13.77z"/><path fill="#BF8904" d="m67.99 51.25l-20.37-7.77l-16.91 13.76l3.46 21.53l20.37 7.76l16.91-13.76z"/><path fill="#875D00" d="m93.17 63.12l-21.82 9.67l-3.44 2.85c.01-.14.6-6.87-4.9-15.06c-3.95-5.89-12.89-9.2-12.89-9.2l4.45 35.3l22.17-9.48l16.43-14.08z"/><path fill="#2F7889" d="M122.27 105.01S75.01 87.3 75.03 86.93l1.12-33.66c.02-.45.47-.75.89-.59l46.35 17.12c.38.14.62.51.61.91l-1.13 33.9c-.01.31-.31.51-.6.4z"/><path fill="#37474F" d="m80.32 89.57l41.95 15.44c.28.11.59-.09.6-.4L124 69.95l-6.99-2.43l-36.69 22.05z"/><path fill="none" stroke="#9DD4E0" stroke-miterlimit="10" stroke-width="2.042" d="M122.27 105.01L75.58 87.76a.858.858 0 0 1-.55-.83l1.12-33.66c.02-.45.47-.75.89-.59l46.35 17.12c.38.14.62.51.61.91l-1.13 33.9c-.01.31-.31.51-.6.4z"/><path fill="none" stroke="#9DD4E0" stroke-miterlimit="10" stroke-width="1.021" d="M123.44 87.63L75.6 69.95m24.97-7.56L99.4 96.41M87.97 57.06l-1.06 35.2m26.14-26.63l-1.06 35.44"/><path fill="#E2A610" d="M75.03 39.47c0-1.57-2.67-2.85-5.96-2.85s-5.96 1.27-5.96 2.85v2.23c0 1.57 2.67 2.85 5.96 2.85s5.96-1.27 5.96-2.85v-2.23z"/><ellipse cx="69.07" cy="39.47" fill="#E2A610" rx="5.96" ry="2.85"/><ellipse cx="69.07" cy="39.27" fill="#FFCA28" rx="5.01" ry="2.2"/><path fill="#E2A610" d="M70.02 39.3s-.19.4-.94.4s-.94-.4-.94-.4s.27-10.28.35-10.95c.08-.67 1.02-.65 1.05 0c.02.65.48 10.95.48 10.95z"/><path fill="#BF8904" d="M75.03 39.47s-.37 1.63-3.68 2.29c-2.43.48-4.17.29-4.59 1.56c-.32.96 1.98 1.75 5.23.87c2.93-.8 3.04-2.26 3.04-2.48v-2.24z"/><path fill="#9DD4E0" d="M53.94 92.43L36.62 46.49c7.54-2.84 21.56 3.62 26.34 16.3s-1.48 26.8-9.02 29.64z"/><path fill="#2F7889" d="m51.7 86.49l2.24 5.94c7.54-2.84 13.81-16.95 9.02-29.64c-.4-1.06-.87-2.08-1.4-3.06c1.9 8.89-1.6 19.92-9.86 26.76z"/><ellipse cx="45.23" cy="69.56" fill="#F5F5F5" rx="13.25" ry="23.6" transform="rotate(-20.653 45.232 69.563)"/><path fill="#BDBDBD" d="M37.04 68.06c-3.51-6.56-5.78-16.39-1.43-20.05c4.59-3.86 11.08.68 14.34 3.57c1.81 1.6 2.76 2.85 3.7 4.13c5.36 7.3 9.97 21.66 3.79 26.91c-4.31 3.66-15.15-4.74-20.4-14.56z"/><path fill="#6392A5" d="M33.52 73.89c-4.31-11.44-2.57-23.13 3.81-25.53s15.4 5.23 19.71 16.67s2.57 23.13-3.81 25.53s-15.4-5.23-19.71-16.67m-1.34.51c4.78 12.69 14.77 20.67 22.31 17.82c7.54-2.84 9.78-15.43 4.99-28.12S44.71 43.44 37.17 46.28c-7.54 2.84-9.77 15.43-4.99 28.12z"/><path fill="none" stroke="#6392A5" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5" d="m26.72 76.3l26.06-11.54M26.72 76.3l15.19-17.01M26.72 76.3l23.25 3.54"/><path fill="#6392A5" d="m28.4 74.49l.79 2.08a.85.85 0 0 1-.5 1.1l-4.13 1.56a.85.85 0 0 1-1.1-.5l-.79-2.08a.85.85 0 0 1 .5-1.1L27.3 74a.85.85 0 0 1 1.1.49z"/></svg></div>
+                        <h3 class="feature-title-3d">VOID-LINK CONSTELLATION</h3>
+                        <p class="feature-description-3d">Our low-orbit satellite network providing high-speed laser communication for Earth, the Moon, and our future Mars missions.</p>
+                    </div>
+                    <div class="feature-card-3d" data-index="5">
+                        <span class="feature-number">06</span>
+                        <div class="feature-icon-3d"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512"><path fill="#ffffff" d="M256.25 20.656c-32.78 0-64.03 6.79-92.438 19c-8.182-10.618-20.994-17.468-35.437-17.468c-24.716 0-44.78 20.033-44.78 44.75c0 8.356 2.324 16.18 6.31 22.874c-42.638 42.655-69.093 101.49-69.093 166.282c0 129.617 105.823 234.72 235.438 234.72c129.615-.002 234.72-105.103 234.72-234.72c0-129.618-105.105-235.438-234.72-235.438zm0 19.313c119.515 0 216.094 96.607 216.094 216.124s-96.58 216.094-216.094 216.094c-119.515 0-216.813-96.577-216.813-216.094c0-59.568 24.176-113.438 63.22-152.5c7.273 5.113 16.15 8.094 25.718 8.094c24.716 0 44.75-20.034 44.75-44.75c0-3.453-.385-6.804-1.125-10.032C197.91 46 226.396 39.97 256.25 39.97zm-.125 51.81c-91.3 0-165.875 74.575-165.875 165.876c0 91.3 74.576 165.406 165.875 165.406c35.12 0 67.708-10.965 94.5-29.656c7.13 4.23 15.45 6.656 24.344 6.656c26.396 0 47.81-21.384 47.81-47.78c0-12.763-5.005-24.366-13.155-32.938c7.677-19.067 11.906-39.884 11.906-61.688c0-91.3-74.106-165.875-165.405-165.875zm0 19.126c81.2 0 146.78 65.55 146.78 146.75c0 17.833-3.172 34.924-8.967 50.72a47.715 47.715 0 0 0-18.97-3.907c-26.396 0-47.78 21.414-47.78 47.81a47.562 47.562 0 0 0 9.28 28.283c-23.065 15.084-50.66 23.843-80.343 23.843c-81.2 0-147.22-65.55-147.22-146.75s66.02-146.75 147.22-146.75zm-1.063 19.625c-7.462 31.99-21.767 62.112-42.906 83.25c-21.14 21.14-48.73 32.913-80.72 40.376c31.99 7.462 62.112 21.736 83.25 42.875c21.14 21.14 32.914 48.764 40.376 80.75c7.463-31.986 19.204-59.61 40.344-80.75c21.14-21.138 51.262-35.412 83.25-42.874c-32.236-7.428-59.455-19.11-80.72-40.375c-21.262-21.263-35.446-51.013-42.873-83.25zm.094 86.564c20.498 0 37.125 16.627 37.125 37.125c0 20.496-16.626 37.124-37.124 37.124c-20.497 0-37.125-16.628-37.125-37.125c0-20.5 16.63-37.126 37.126-37.126z"/></svg></div>
+                        <h3 class="feature-title-3d">AUTONOMOUS ORBITAL SHIPYARD</h3>
+                        <p class="feature-description-3d">'Stratos' — a LEO dry-dock using AI and 3D printing to build interstellar ships.</p>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <div class="carousel-btn" id="prevBtn">◀</div>
+                    <div class="carousel-btn" id="nextBtn">▶</div>
+                </div>
+                <div class="carousel-indicators" id="indicators"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <a href="#about" class="nav-btn-prev" title="Previous Section">
+            <div class="hexagon">
+                <span class="hex-content">▲</span>
+            </div>
+        </a>
+        <a href="#gallery" class="nav-btn-next" title="Next Section">
+            <div class="pyramid">
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-base"></div>
+                <span class="pyramid-inner">▼</span>
+            </div>
+        </a>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section section-gradient" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Dynamic Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2017/09/21/08/28/satellite-2771128_1280.jpg" alt="VOID-LINK CONSTELLATION" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">VOID-LINK CONSTELLATION</h3>
+                        <p class="gallery-subtitle">Our low orbit satellite</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2011/12/14/12/11/astronaut-11080_1280.jpg" alt="AUTONOMOUS LANDING" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">AUTONOMOUS LANDING</h3>
+                        <p class="gallery-subtitle">Astronaut's perspective</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2011/12/15/11/37/galaxy-11188_1280.jpg" alt="BIG BANG" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">BIG BANG</h3>
+                        <p class="gallery-subtitle">The Explosion</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2010/12/01/space-shuttle-774_1280.jpg" alt="DASSAULT AEROSPACE" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">DASSAULT AEROSPACE</h3>
+                        <p class="gallery-subtitle">Space shuttle</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2021/11/11/09/12/lighthouse-6785763_1280.jpg" alt="THE LIGHT TOWER" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">THE LIGHT TOWER</h3>
+                        <p class="gallery-subtitle">From the earth to the sky</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://cdn.pixabay.com/photo/2018/03/08/20/01/astronomy-3209688_1280.jpg" alt="THE TARTARUS RIFT" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">THE TARTARUS RIFT</h3>
+                        <p class="gallery-subtitle">Void-Sector 7G</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1534996858221-380b92700493?w=600&h=300&fit=crop" alt="Northern Lights" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Aurora Borealis</h3>
+                        <p class="gallery-subtitle">Natural light phenomena</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=600&h=300&fit=crop" alt="Digital Matrix" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">Digital Matrix</h3>
+                        <p class="gallery-subtitle">Cyber dimensions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <a href="#features" class="nav-btn-prev" title="Previous Section">
+            <div class="hexagon">
+                <span class="hex-content">▲</span>
+            </div>
+        </a>
+        <a href="#contact" class="nav-btn-next" title="Next Section">
+            <div class="pyramid">
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-base"></div>
+                <span class="pyramid-inner">▼</span>
+            </div>
+        </a>
+    </section>
+
+<!-- Contact Section -->
+<section class="content-section contact-section-bg" id="contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+
+                <input type="hidden" name="access_key" value="c22907a5-4f8f-4903-af66-2d5e6d1b468f">
+
+                <div class="form-group">
+                    <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="subject" class="form-input" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" class="form-input form-textarea" placeholder="Your Message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            
+            </form>
+            
+            <div class="contact-info">
+                <h3>Connect With Us</h3>
+                <div class="info-item">
+                    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcSDZPPJQTMmdzpvQWshxJkKBtFTJPKTMdtBZSCgSMzsmHBXcLztMLgHjZQzWZvNMlcgcXQKj">
+                    <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 42 42"><path fill="#ffffff" d="M40.5 31.5v-18S22.3 26.2 20.53 26.859C18.79 26.23.5 13.5.5 13.5v18c0 2.5.53 3 3 3h34c2.529 0 3-.439 3-3zm-.029-21.529c0-1.821-.531-2.471-2.971-2.471h-34c-2.51 0-3 .78-3 2.6l.03.28s18.069 12.44 20 13.12c2.04-.79 19.97-13.4 19.97-13.4l-.029-.129z"/></svg></div>
+                    </a>
+                    <span class="info-text">hello@void.com</span>
+                </div>
+                <div class="info-item">
+                    <a href="https://web.whatsapp.com/">
+                    <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 42 42"><path fill="#ffffff" d="M31.5 6.65c0-2.589-.561-3.15-3-3.15h-17c-2.47 0-3 .529-3 3.15V36.5c0 2.439.56 3 3 3h17c2.5 0 3-.561 3-3V6.65zm-18 1.85h13v24h-13v-24zm8 28h-3v-2h3v2z"/></svg></div>
+                    </a>
+                    <span class="info-text">+971 56 838 7374</span>
+                </div>
+                <div class="info-item">
+                    <a href="https://maps.app.goo.gl/ngVLyQw8bQ3ngaNS6">
+                    <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 304 432"><path fill="#ffffff" d="M149 3q62 0 106 43.5T299 152q0 31-15.5 71.5t-37.5 75t-44 65t-37 48.5l-16 17q-6-6-16-18t-35.5-46.5t-45.5-67T16 224T0 152Q0 90 43.5 46.5T149 3zm0 202q22 0 38-15.5t16-37.5t-16-37.5T149 99t-37.5 15.5T96 152t15.5 37.5T149 205z"/></svg></div>
+                    </a>
+                    <span class="info-text">United Arab Emirates, Burj Khalifa, ST-4833</span>
+                </div>
+                <div class="info-item">
+                    <a href="https://faisal-portfolio-theta.vercel.app/">
+                    <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1023"><path fill="#ffffff" d="M881 321q-10-2-15-2q-37 0-64 25q-61-27-114-44q-87-28-182-46q-9-24-27-40Q504 96 546 0q126 9 231.5 73T948 241q-37 40-67 80zM417 191q-26 0-49 14q-81-60-163-102Q329 9 483 0q-39 87-63 191h-3zM70 253q34-57 86-108q68 35 141 86q-129-3-227 22zm251 40q2 31 21.5 54.5T391 379q-6 70-6 133q0 44 3 101q-22 7-39 24q-54-21-104-48q11-22 11-45q0-40-28-68t-68-28q-44 0-73 34q-42-38-75-79q9-43 27-85q122-34 282-25zM65 552q3 37 30.5 62.5T160 640q11 0 24-4q64 37 137 64v4q0 39 26.5 66.5T413 800q25 122 70 223q-100-6-189-48.5T140.5 864T38 704T0 512q0-1 1-27q28 35 64 67zm436 197q72 13 145 17q7 20 22 37q-23 105-28 204q-51 13-94 16q-47-107-73-242q18-12 28-32zm310 48q13-16 18-34q73-6 141-19q-48 94-132 163q-9-52-27-110zm-163-95q-70-4-138-18q-11-50-57-69q-4-59-4-103q0-66 6-137q2 0 5-2t4-2q39 38 68 70q87 96 148 218q-22 17-32 43zm89 130q2 0 11-1q17 61 25 121q-29 17-70 34q7-78 24-155q8 1 10 1zm-5-239q-1 2-2.5 6t-2.5 6q-63-114-148-207q-31-35-74-76q1 0 1.5-1.5l.5-1.5q84 17 161 42q47 15 103 40q-2 10-2 15q0 30 18 55q-33 63-55 122zm47 58q12-35 12-36q20-50 50-107q13 4 25 4q34 0 61-23q49 34 96 76q-6 57-24 110q-82 17-173 24q-13-32-47-48zm183-236q0-33-22-60q21-27 42-49q36 82 42 169q-33-25-64-45q2-9 2-15z"/></svg></div>
+                    </a>
+                    <span class="info-text">www.thevoid.com</span>
+                </div>
+            </div>
+        </div>
+
+                <!-- Navigation -->
+        <a href="#new-hero-section" class="nav-btn-prev" title="Previous Section">
+            <div class="hexagon">
+                <span class="hex-content">▲</span>
+            </div>
+        </a>
+    </div>
+</section>
+
+    <!-- Footer -->
+<footer>
+    <!-- Main container for footer content -->
+    <div class="row">
+        <!-- First column: About Void -->
+        <div class="col">
+        <a href="index.html"><svg id="logo-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+            <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+        </svg></a>
+            <p>The Void Dynamics, a french aerospace pogram is engineering the technology for a multi-planetary future. We build the systems that will take humanity beyond the horizon. <b>Join the mission</b>.</p>
+        </div>
+
+        <!-- Second column: Office details -->
+        <div class="col">
+            <h3>Office 
+                <div class="underline"><span></span></div>
+            </h3>
+            <p>United Arab Emirates</p>
+            <p>Dubai, Business Bay</p>
+            <p>Burj Khalifa Building</p>
+            <p class="support">Email: support@void.com</p>
+            <h4>Phone: +971 56 8387374</h4>
+        </div>
+
+        <!-- Third column: Navigation links -->
+        <div class="col">
+            <h3>Links 
+                <div class="underline"><span></span></div>
+            </h3>
+            <ul class="king">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Pages/aboutus.html">About us</a></li>
+                <li><a href="Pages/news.html">News</a></li>
+                <li><a href="Pages/diary.html">Diary</a></li>
+                <li><a href="Pages/gallery.html">Gallery</a></li>
+                <li><a href="Pages/mission.html">Mission</a></li>
+                <li><a href="Pages/login.html">Login / signup</a></li>
+            </ul>
+        </div>
+
+        <!-- Fourth column: Newsletter subscription -->
+        <div class="col">
+            <h3>Newsletter 
+                <div class="underline"><span></span></div>
+            </h3>
+            <!-- Newsletter subscription form -->
+            <form class="news">
+                <i class="fa-regular fa-envelope"></i>
+                <input class="Newsletter" type="email" placeholder="Enter your email id" required>
+                <button class="Subscribe" type="submit">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Social media icons -->
+            <div class="apps">
+                <a href="https://www.facebook.com/mohammed.fais.98622"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/5aisal.me/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/mohammed-faisal-169824280/"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/mohamfaisal"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Horizontal line to separate footer content from copyright -->
+    <hr>
+
+    <!-- Copyright notice -->
+    <p class="copyright">© 2025 Void. All rights reserved by Faisal.</p>
+</footer>
+
+<div id="logout-modal" class="notification-overlay">
+  <div class="notification-box">
+    <h3>End Session?</h3>
+    <p>Are you sure you want to disconnect from the Void</p>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="logout-cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="logout-confirm-btn" class="btn-primary">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+<script src="JavaScripts/script.js"></script>
+</body>
+</html>

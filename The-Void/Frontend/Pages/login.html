@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Void</title>
+    <link rel="stylesheet" href="/The-Void/Frontend/Styles/login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="icon" type="image/svg+xml" href="/The-Void/Frontend/favicon.svg">
+    <script src="https://unpkg.com/akar-icons-fonts"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  </head>
+  <body>
+
+    <!-- Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+    
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <div class="card">
+      <ul class="card-nav">
+        <li> <a href="/The-Void/Frontend/index.html">
+            <svg id="logo22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                <path fill="black" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+            </svg></a>
+          <span class="active-bar"></span>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="signin active"
+            onclick="selectView('signin')"
+          >
+            <i class="ai-person-check"></i>
+            <span>Sign In</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="signup" onclick="selectView('signup')">
+            <i class="ai-person-add"></i>
+            <span>Sign Up</span>
+          </button>
+        </li>
+      </ul>
+      <div class="card-hero">
+        <div class="card-hero-inner">
+          <div class="card-hero-content signin">
+            <h2>Welcome Back.</h2>
+            <h3>Please enter your credentials.</h3>
+            <img src="/The-Void/Frontend/images/signin4.png"/>
+          </div>
+          <div class="card-hero-content signup">
+            <h2>Sign Up Now.</h2>
+            <h3>Join the crowd and get started.</h3>
+            <img src="/The-Void/Frontend/images/signup.png" />
+          </div>
+        </div>
+      </div>
+      <div class="card-form">
+        <div class="forms">
+          <form id="signin" class="active">
+<div class="social-login-container">
+<div style="position: relative; width: 48px; height: 48px;">
+
+    <div class="social-btn" style="
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        z-index: 1;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
+            <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+            <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+            <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+            <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+        </svg>
+    </div>
+
+    <div id="google-signin-circle" style="
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        z-index: 10; 
+        opacity: 0.01; /* Invisible but clickable */
+        overflow: hidden;
+        cursor: pointer;">
+    </div>
+
+</div>
+
+    <button class="social-btn fb-btn" aria-label="Login with Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
+            <path fill="#1877F2" d="M24,4C12.954,4,4,12.954,4,24c0,10.057,7.409,18.411,17.062,19.824V29.742h-4.996V24h4.996v-4.322c0-4.928,2.923-7.653,7.419-7.653c2.153,0,4.406,0.161,4.406,0.161v4.846h-2.482c-2.443,0-3.205,1.516-3.205,3.069V24h5.459l-0.873,5.742h-4.586v14.075C36.577,42.399,44,34.049,44,24C44,12.954,35.046,4,24,4z"/>
+        </svg>
+    </button>
+
+    <button class="social-btn apple-btn" aria-label="Login with Apple">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="28px" height="28px">
+            <path fill="black" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-11.4 69.5-34.3z"/>
+        </svg>
+    </button>
+</div>
+            <label> Email </label>
+            <div class="control">
+              <input type="email" placeholder="youremail@gmail.com" />
+              <i class="ai-envelope"></i>
+            </div>
+            <label> Password </label>
+            <div class="control">
+              <input type="password" placeholder="●●●●●●●●●●●●●●●" />
+              <i class="ai-lock-on"></i>
+            </div>
+            <button class="signinup">SIGN IN</button>
+            <p class="footer22">
+              By clicking Sign In you agree to our terms and conditions, privacy
+              policy and reusability rules.
+            </p>
+          </form>
+          <form id="signup">
+<div id="google-btn-container" style="display: flex; justify-content: center; margin-bottom: 5px;"></div>
+            <label> Username </label>
+            <div class="control">
+              <input type="text" placeholder="myusername" />
+              <i class="ai-person"></i>
+            </div>
+            <label> Email </label>
+            <div class="control">
+              <input type="email" placeholder="youremail@gmail.com" />
+              <i class="ai-envelope"></i>
+            </div>
+            <label> Password </label>
+            <div class="control">
+              <input type="password" placeholder="●●●●●●●●●●●●●●●" />
+              <i class="ai-lock-on"></i>
+            </div>
+            <button class="signinup">SIGN UP</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="custom-notification" class="notification-overlay">
+  <div class="notification-box">
+    <h3 id="notification-title">Mission Update</h3>
+    <p id="notification-message"></p>
+    <button id="notification-close-btn">Acknowledge</button>
+  </div>
+</div>
+
+    <script src="/The-Void/Frontend/JavaScripts/login.js"></script>
+  </body>
+</html>

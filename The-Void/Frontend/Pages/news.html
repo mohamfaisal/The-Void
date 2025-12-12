@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic News Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/The-Void/Frontend/Styles/news.css">
+    <link rel="icon" type="image/svg+xml" href="/The-Void/Frontend/favicon.svg">
+</head>
+<body>
+
+    <!-- START MERGED NAVBAR -->
+<div id="merged-navbar-container">
+    <header id="myHeader">
+        
+        <!-- Desktop Logo -->
+        <a href="/The-Void/Frontend/index.html" class="desktop-logo-link">
+            <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+            </svg>
+        </a>
+        
+        <!-- Desktop Nav -->
+        <nav class="desktop-nav">
+            <a href="/The-Void/Frontend/index.html">Home</a>
+            <a href="/The-Void/Frontend/Pages/aboutus.html">About Us</a>
+            <a href="/The-Void/Frontend/Pages/news.html">News</a>
+            <a href="/The-Void/Frontend/Pages/diary.html">Diary</a>
+            <a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a>
+            <a href="/The-Void/Frontend/Pages/mission.html">Missions</a>
+            <a href="/The-Void/Frontend/Pages/login.html">Login</a>
+            <button id="openmenu">
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Mobile Logo -->
+        <a href="/The-Void/Frontend/index.html" class="mobile-logo-link">
+             <svg id="mobile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+            </svg>
+        </a>
+
+    </header>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-sidebar">
+        <nav class="mobile-nav-links">
+            <a href="/The-Void/Frontend/index.html">Home</a>
+            <a href="/The-Void/Frontend/Pages/aboutus.html">About Us</a>
+            <a href="/The-Void/Frontend/Pages/news.html">News</a>
+            <a href="/The-Void/Frontend/Pages/diary.html">Diary</a>
+            <a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a>
+            <a href="/The-Void/Frontend/Pages/mission.html">Missions</a>
+            <a href="/The-Void/Frontend/Pages/login.html">Login</a>
+        </nav>
+    </div>
+    
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay"></div>
+</div>
+<!-- END MERGED NAVBAR -->
+
+    <!-- Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+
+    <!-- Background Stars -->
+    <div id="starfield" class="stars"></div>
+
+    <!-- Main Content Container -->
+    <main class="container2">
+        
+        <!-- Carousel / Featured Section -->
+        <section id="featured-carousel">
+
+            <div class="spinner-container">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-accent"></i>
+            </div>
+        </section>
+
+        <!-- Filter Navigation -->
+        <div class="filter-wrapper">
+            <div id="filter-container" class="hide-scrollbar">
+             
+            </div>
+        </div>
+
+        <!-- News Grid -->
+        <div id="news-grid">
+            
+        </div>
+
+    </main>
+
+    <!-- Modal for Comments & Details -->
+    <div id="news-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div style="padding-right: 2rem;">
+                    <span id="modal-category" class="modal-cat-tag"></span>
+                    <h3 id="modal-title" class="modal-title"></h3>
+                </div>
+                <button onclick="closeModal()" class="btn-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="modal-body custom-scrollbar">
+                <img id="modal-image" src="" alt="News Detail" class="modal-img">
+                <p id="modal-content" class="modal-text"></p>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h4 class="comments-header">
+                        <i class="fa-regular fa-comments text-accent-purple"></i> Discussion
+                    </h4>
+                    
+                    <!-- Comment Form -->
+                    <div class="comment-form">
+                        <input type="text" id="comment-input" placeholder="Transmission from Earth..." class="input-comment">
+                        <button onclick="submitComment()" class="btn-send">Send</button>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div id="comments-list" class="comments-list custom-scrollbar">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <span style="font-size: 0.875rem; color: var(--text-gray);">Source: Cosmic Wire API</span>
+                <button onclick="toggleModalLike()" id="modal-like-btn" class="btn-like-modal">
+                    <i class="fa-regular fa-heart"></i> <span>Like</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Footer -->
+<footer>
+    <!-- Main container for footer content -->
+    <div class="row">
+        <!-- First column: About Void -->
+        <div class="col">
+        <a href="/The-Void/Frontend/index.html"><svg id="logo-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+            <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+        </svg></a>
+            <p>The Void Dynamics, a french aerospace pogram is engineering the technology for a multi-planetary future. We build the systems that will take humanity beyond the horizon. <b>Join the mission</b>.</p>
+        </div>
+
+        <!-- Second column: Office details -->
+        <div class="col">
+            <h3>Office 
+                <div class="underline"><span></span></div>
+            </h3>
+            <p>United Arab Emirates</p>
+            <p>Dubai, Business Bay</p>
+            <p>Burj Khalifa Building</p>
+            <p class="support">Email: support@void.com</p>
+            <h4>Phone: +971 56 8387374</h4>
+        </div>
+
+        <!-- Third column: Navigation links -->
+        <div class="col">
+            <h3>Links 
+                <div class="underline"><span></span></div>
+            </h3>
+            <ul class="king">
+                <li><a href="/The-Void/Frontend/index.html">Home</a></li>
+                <li><a href="/The-Void/Frontend/Pages/aboutus.html">About us</a></li>
+                <li><a href="/The-Void/Frontend/Pages/news.html">News</a></li>
+                <li><a href="/The-Void/Frontend/Pages/diary.html">Diary</a></li>
+                <li><a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a></li>
+                <li><a href="/The-Void/Frontend/Pages/mission.html">Mission</a></li>
+                <li><a href="/The-Void/Frontend/Pages/login.html">Login / signup</a></li>
+            </ul>
+        </div>
+
+        <!-- Fourth column: Newsletter subscription -->
+        <div class="col">
+            <h3>Newsletter 
+                <div class="underline"><span></span></div>
+            </h3>
+            <!-- Newsletter subscription form -->
+            <form class="news">
+                <i class="fa-regular fa-envelope"></i>
+                <input class="Newsletter" type="email" placeholder="Enter your email id" required>
+                <button class="Subscribe" type="submit">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Social media icons -->
+            <div class="apps">
+                <a href="https://www.facebook.com/mohammed.fais.98622"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/5aisal.me/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/mohammed-faisal-169824280/"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/mohamfaisal"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Horizontal line to separate footer content from copyright -->
+    <hr>
+
+    <!-- Copyright notice -->
+    <p class="copyright">© 2025 Void. All rights reserved by Faisal.</p>
+</footer>
+
+<div id="logout-modal" class="notification-overlay">
+  <div class="notification-box">
+    <h3>End Session?</h3>
+    <p>Are you sure you want to disconnect from the Void</p>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="logout-cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="logout-confirm-btn" class="btn-primary">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+    <script src="/The-Void/Frontend/JavaScripts/news.js"></script>
+</body>
+</html>

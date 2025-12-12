@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Void</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/The-Void/Frontend/Styles/mission.css">
+    <link rel="icon" type="image/svg+xml" href="/The-Void/Frontend/favicon.svg">
+</head>
+<body>
+
+        <!-- START MERGED NAVBAR -->
+    <div id="merged-navbar-container">
+        <header id="myHeader">
+            <!-- Desktop Logo -->
+            <a href="/The-Void/Frontend/index.html" class="desktop-logo-link">
+                <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                    <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+                </svg>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="desktop-nav">
+                <a href="/The-Void/Frontend/index.html">Home</a>
+                <a href="/The-Void/Frontend/Pages/aboutus.html">About Us</a>
+                <a href="/The-Void/Frontend/Pages/news.html">News</a>
+                <a href="/The-Void/Frontend/Pages/diary.html">Diary</a>
+                <a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a>
+                <a href="/The-Void/Frontend/Pages/mission.html">Missions</a>
+                <a href="/The-Void/Frontend/Pages/login.html">Login</a>
+                <button id="openmenu">
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <!-- Mobile Logo -->
+            <a href="/The-Void/Frontend/index.html" class="mobile-logo-link">
+                 <svg id="mobile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+                    <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+                </svg>
+            </a>
+        </header>
+
+        <!-- Mobile Sidebar -->
+        <div id="mobile-sidebar">
+            <nav class="mobile-nav-links">
+                <a href="/The-Void/Frontend/index.html">Home</a>
+                <a href="/The-Void/Frontend/Pages/aboutus.html">About Us</a>
+                <a href="/The-Void/Frontend/Pages/news.html">News</a>
+                <a href="/The-Void/Frontend/Pages/diary.html">Diary</a>
+                <a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a>
+                <a href="/The-Void/Frontend/Pages/mission.html">Missions</a>
+                <a href="/The-Void/Frontend/Pages/login.html">Login</a>
+            </nav>
+        </div>
+        
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay"></div>
+    </div>
+    <!-- END MERGED NAVBAR -->
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Your <span id="color">Mission</span> Control<br>for Galactic <span id="color1">Creativity</span></h1>
+            <p class="hero-subtitle">Connect anywhere.<br>View mission speeds in your country.</p>
+        </div>
+
+        <!-- HERO BOTTOM CARDS -->
+        <div class="cards-container">
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Mission Control</h3>
+                    <p>Initialize custom missions. Set commanders, payloads, and launch trajectories for your fleet.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary1" onclick="scrollToSection('user-missions')">Create Mission</button>
+                    <button class="btn btn-outline">Learn More</button>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Fleet Tracking</h3>
+                    <p>Monitor real-time launch schedules, vehicle status, and historical mission data from the archives.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-primary1" onclick="scrollToSection('spacex-data')">View Launches</button>
+                    <button class="btn btn-outline">View Map</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- SPACEX API DATA SECTION -->
+    <section id="spacex-data" class="api-section">
+        
+        <!-- 1. ONGOING MISSIONS (Most Recent Launch) -->
+        <div class="data-container">
+            <h2 class="section-header">Ongoing / Recent Mission</h2>
+            <div id="ongoing-mission" class="ongoing-card">
+                <div class="loading-spinner">Loading Mission Data...</div>
+            </div>
+        </div>
+
+        <!-- 2. UPCOMING LAUNCHES -->
+        <div class="data-container">
+            <h2 class="section-header">Upcoming Launches</h2>
+            <div class="table-responsive">
+                <table class="mission-table">
+                    <thead>
+                        <tr>
+                            <th>Mission</th>
+                            <th>Rocket</th>
+                            <th>Launch Site</th>
+                            <th>Countdown / Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="upcoming-table-body">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. COMPLETED MISSIONS -->
+        <div class="data-container">
+            <div class="header-row">
+                <h2 class="section-header">Completed Missions</h2>
+                <input type="text" id="searchPast" placeholder="Search Mission Name..." class="search-box">
+            </div>
+            <div class="table-responsive">
+                <table class="mission-table">
+                    <thead>
+                        <tr>
+                            <th>Mission</th>
+                            <th>Rocket</th>
+                            <th>Launch Site</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="past-table-body">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- USER MISSION CONTROL (CRUD) SECTION -->
+    <section id="user-missions" class="crud-section">
+        <h2 class="section-title">User Mission Control</h2>
+        <p style="text-align:center; color:#888; margin-bottom:30px;">Create and manage your own custom launch schedules.</p>
+
+        <!-- CREATE FORM -->
+        <div class="mission-form-container">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Commander Name</label>
+                    <input type="text" id="pilotName" placeholder="e.g. Elon Musk">
+                </div>
+                <div class="form-group">
+                    <label>Mission Name</label>
+                    <input type="text" id="missionName" placeholder="e.g. Starship IFT-5">
+                </div>
+                <div class="form-group full-width">
+                    <label>Launch Date</label>
+                    <input type="date" id="launchDate">
+                </div>
+                <div class="form-group full-width">
+                    <label>Mission Brief</label>
+                    <textarea id="missionDesc" rows="3" placeholder="Short description of objectives..."></textarea>
+                </div>
+            </div>
+            <button class="btn-launch" onclick="createMission()">Initialize Mission</button>
+        </div>
+
+        <!-- DISPLAY GRID -->
+        <div id="missionGrid" class="missions-grid">
+           
+        </div>
+    </section>
+
+    <!-- EDIT MODAL (Hidden by default) -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 20px; text-transform: uppercase;">Edit Mission Parameters</h3>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Commander Name</label>
+                <input type="text" id="editPilotName">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Mission Name</label>
+                <input type="text" id="editMissionName">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Launch Date</label>
+                <input type="date" id="editLaunchDate">
+            </div>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>Mission Brief</label>
+                <textarea id="editMissionDesc" rows="3"></textarea>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn btn-save" onclick="saveEdit()">Save</button>
+                <button class="btn btn-delete" onclick="deleteMission()">Abort</button>
+                <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Footer -->
+<footer>
+    <!-- Main container for footer content -->
+    <div class="row">
+        <!-- First column: About Void-->
+        <div class="col">
+        <a href="/The-Void/Frontend/index.html"><svg id="logo-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.6 401.1">
+            <path fill="#fff" fill-rule="evenodd" d="M502.8 0h211.8l-23 39.7-138.5 240L483 401H342.7L413 279.6 251.4 0h140.3L483 158.1 538.6 62 502.8 0Zm-201 279.6L140.1 0H0l231.7 401 70-121.4Z"/>
+        </svg></a>
+            <p>The Void Dynamics, a french aerospace pogram is engineering the technology for a multi-planetary future. We build the systems that will take humanity beyond the horizon. <b>Join the mission</b>.</p>
+        </div>
+
+        <!-- Second column: Office details -->
+        <div class="col">
+            <h3>Office 
+                <div class="underline"><span></span></div>
+            </h3>
+            <p>United Arab Emirates</p>
+            <p>Dubai, Business Bay</p>
+            <p>Burj Khalifa Building</p>
+            <p class="support">Email: support@void.com</p>
+            <h4>Phone: +971 56 8387374</h4>
+        </div>
+
+        <!-- Third column: Navigation links -->
+        <div class="col">
+            <h3>Links 
+                <div class="underline"><span></span></div>
+            </h3>
+            <ul class="king">
+                <li><a href="/The-Void/Frontend/index.html">Home</a></li>
+                <li><a href="/The-Void/Frontend/Pages/aboutus.html">About us</a></li>
+                <li><a href="/The-Void/Frontend/Pages/news.html">News</a></li>
+                <li><a href="/The-Void/Frontend/Pages/diary.html">Diary</a></li>
+                <li><a href="/The-Void/Frontend/Pages/gallery.html">Gallery</a></li>
+                <li><a href="/The-Void/Frontend/Pages/mission.html">Mission</a></li>
+                <li><a href="/The-Void/Frontend/Pages/login.html">Login / signup</a></li>
+            </ul>
+        </div>
+
+        <!-- Fourth column: Newsletter subscription -->
+        <div class="col">
+            <h3>Newsletter 
+                <div class="underline"><span></span></div>
+            </h3>
+            <!-- Newsletter subscription form -->
+            <form class="news">
+                <i class="fa-regular fa-envelope"></i>
+                <input class="Newsletter" type="email" placeholder="Enter your email id" required>
+                <button class="Subscribe" type="submit">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Social media icons -->
+            <div class="apps">
+                <a href="https://www.facebook.com/mohammed.fais.98622"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/5aisal.me/"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/mohammed-faisal-169824280/"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/mohamfaisal"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Horizontal line to separate footer content from copyright -->
+    <hr>
+
+    <!-- Copyright notice -->
+    <p class="copyright">© 2025 Void. All rights reserved by Faisal.</p>
+</footer>
+
+<div id="logout-modal" class="notification-overlay">
+  <div class="notification-box">
+    <h3>End Session?</h3>
+    <p>Are you sure you want to disconnect from the Void</p>
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="logout-cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="logout-confirm-btn" class="btn-primary">Disconnect</button>
+    </div>
+  </div>
+</div>
+
+<div id="abort-modal" class="notification-overlay" style="z-index: 10001;">
+  <div class="notification-box">
+    <h3 style="color: #ff4d4d;">⚠ ABORT SEQUENCE ⚠</h3>
+    <p>Are you sure you want to scrub this mission? <br>This action cannot be undone.</p>
+    
+    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+        <button id="abort-cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="abort-confirm-btn" class="btn-primary" 
+                style="background: linear-gradient(135deg, #ff4d4d, #cc0000); box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);">
+            CONFIRM ABORT
+        </button>
+    </div>
+  </div>
+</div>
+
+    <script src="/The-Void/Frontend/JavaScripts/mission.js"></script>
+</body>
+</html>
