@@ -1940,7 +1940,8 @@ hr {
 	}
 
 	.hero-title {
-		margin-top: -160px;
+		margin-top: -190px;
+		font-size: 2rem;
 	}
 
 	.rectangles-bottom-left,
@@ -2248,6 +2249,7 @@ hr {
 
 	.carousel-controls {
 		bottom: -40px;
+		top: 430px;
 	}
 
 	.carousel-btn {
@@ -2258,6 +2260,7 @@ hr {
 
 	.carousel-indicators {
 		bottom: -75px;
+		top: 500px;
 	}
 
 	/* Gallery Mobile */
@@ -2447,8 +2450,8 @@ hr {
 	}
 
 	.feature-icon-3d {
-		width: 40px;
-		height: 40px;
+		width: 60px;
+		height: 60px;
 		font-size: 20px;
 		margin-bottom: 12px;
 	}
@@ -2530,6 +2533,10 @@ hr {
 		font-size: 0.85rem;
 		flex: 1;
 		min-width: 0;
+	}
+
+	.carousel-btn {
+		top: 400px;
 	}
 }
 
