@@ -412,7 +412,7 @@ html {
 }
 
 @media (max-width: 600px) {
-    .hero-title1 {
+    .hero-title1 span {
         font-size: 3rem;
     }
 }
