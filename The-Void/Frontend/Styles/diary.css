@@ -411,6 +411,12 @@ html {
     .diary-hero { height: 50vh; }
 }
 
+@media (max-width: 600px) {
+    .hero-title1 {
+        font-size: 3rem;
+    }
+}
+
 /* Mouse Follower */
 .mouse-follower {
     position: fixed;
