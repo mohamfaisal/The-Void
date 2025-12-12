@@ -413,9 +413,16 @@ html {
 
 @media (max-width: 600px) {
     .hero-title1 span {
-        font-size: 3rem;
+        font-size: 4rem;
     }
 }
+
+@media (max-width: 500px) {
+    .hero-title1 span {
+        font-size: 2.8rem;
+    }
+}
+
 
 /* Mouse Follower */
 .mouse-follower {
