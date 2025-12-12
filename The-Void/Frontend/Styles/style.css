@@ -2535,8 +2535,8 @@ hr {
 		min-width: 0;
 	}
 
-	.carousel-btn {
-		top: 300px;
+	.carousel-indicators {
+		top: 400px;
 	}
 
 	.carousel-controls {
