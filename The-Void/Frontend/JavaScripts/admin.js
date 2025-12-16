@@ -1,5 +1,5 @@
-const API_URL = 'http://127.0.0.1:5002/api/admin';
-const AUTH_URL = 'http://127.0.0.1:5002/api'; // For creating users
+const API_URL = 'https://the-void-backend.onrender.com/api/admin';
+const AUTH_URL = 'https://the-void-backend.onrender.com/api'; // For creating users
 
 // Variables for Models
 let userIdToDelete = null;

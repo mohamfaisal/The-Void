@@ -67,7 +67,7 @@ animateFollower();
 
 
 /* --- AUTHENTICATION LOGIC --- */
-const API_URL = "http://127.0.0.1:5002/api";
+const API_URL = "https://the-void-backend.onrender.com/api";
 
 // 1. SIGN UP
 const signupForm = document.getElementById('signup');

@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let notes = [];
     
     // YOUR BACKEND URL
-    const API_URL = 'http://127.0.0.1:5002/api/entries';
+    const API_URL = 'https://the-void-backend.onrender.com/api/entries';
 
     const tagColors = {
         'Work': { bg: 'bg-blue-100', text: 'text-blue-700', label: 'Missions' },

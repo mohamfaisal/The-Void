@@ -153,7 +153,7 @@ const SPACEX_API_PAST = 'https://api.spacexdata.com/v4/launches/past';
 const SPACEX_API_ROCKETS = 'https://api.spacexdata.com/v4/rockets';
 
 // --- BACKEND URL ---
-const API_URL = 'http://127.0.0.1:5002/api/missions';
+const API_URL = 'https://the-void-backend.onrender.com/api/missions';
 
 // --- STATE ---
 let rocketsMap = {};

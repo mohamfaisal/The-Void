@@ -1,5 +1,5 @@
 /* --- CONFIGURATION --- */
-const API_URL = 'http://127.0.0.1:5002/api/news';
+const API_URL = 'https://the-void-backend.onrender.com/api/news';
 
 /* --- MOCK DATA (Article Source) --- */
 const categories = ["Space", "Technology", "Science", "Entertainment", "World", "Sports", "Health", "Business"];

@@ -1,5 +1,5 @@
 /* --- CONFIGURATION --- */
-const API_URL = 'http://127.0.0.1:5002/api/gallery';
+const API_URL = 'https://the-void-backend.onrender.com/api/gallery';
 
 /* --- UI ELEMENTS --- */
 const chooseBtn = document.getElementById('chooseBtn');
