@@ -153,7 +153,7 @@ signinBtn.addEventListener('click', async (e) => {
             setTimeout(() => {
                 // Redirect Admin to Admin Panel, others to Home
                 if(data.role === 'admin') {
-                    window.location.href = "../admin.html";
+                    window.location.href = "/Pages/admin.html";
                     } else {
                         window.location.href = "../index.html";
                     }

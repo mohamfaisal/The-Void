@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If not logged in OR not admin, kick them out
     if (!token || role !== 'admin') {
         alert("ACCESS DENIED: Commanders Only.");
-        window.location.href = "../login.html";
+        window.location.href = "/Pages/login.html";
         return;
     }
 
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('token');
             localStorage.removeItem('username');
             localStorage.removeItem('role');
-            window.location.href = "/The-Void/Frontend/index.html";
+            window.location.href = "/index.html";
         };
     }
 
