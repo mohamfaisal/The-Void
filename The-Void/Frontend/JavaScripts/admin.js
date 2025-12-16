@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // If not logged in OR not admin, kick them out
     if (!token || role !== 'admin') {
         alert("ACCESS DENIED: Commanders Only.");
-        window.location.href = "/The-Void/Frontend/Pages/login.html";
+        window.location.href = "../login.html";
         return;
     }
 
