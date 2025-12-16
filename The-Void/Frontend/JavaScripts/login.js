@@ -153,9 +153,9 @@ signinBtn.addEventListener('click', async (e) => {
             setTimeout(() => {
                 // Redirect Admin to Admin Panel, others to Home
                 if(data.role === 'admin') {
-                    window.location.href = "/The-Void/Frontend/Pages/admin.html";
+                    window.location.href = "../admin.html";
                     } else {
-                        window.location.href = "/The-Void/Frontend/index.html";
+                        window.location.href = "../index.html";
                     }
             }, 2000); 
         } else {
@@ -188,9 +188,9 @@ function handleGoogleLogin(response) {
             localStorage.setItem('username', data.username);
 showNotification("Google Login Successful! Welcome " + data.username + ". Redirecting...");
 setTimeout(() => {
-    window.location.href = "/The-Void/Frontend/index.html";
+    window.location.href = "../index.html";
 }, 2000);
-            window.location.href = "/The-Void/Frontend/index.html";
+            window.location.href = "../index.html";
         } else {
             alert("Google Login Failed: " + data.error);
         }
