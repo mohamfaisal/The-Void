@@ -83,7 +83,7 @@ app.post('/api/login', async (req, res) => {
         // Create Token (The digital ID card)
         const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
-        res.json({ token, username: user.username, message: "Login successful!" });
+        res.json({ token, username: user.username, role: user.role, message: "Login successful!" });
     } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
@@ -282,6 +282,69 @@ app.post('/api/news/:id/comment', async (req, res) => {
         doc.comments.push({ user, text, date });
         await doc.save();
         res.json(doc);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// ADMIN PANEL ROUTES
+
+// GET: Dashboard Stats
+app.get('/api/admin/stats', async (req, res) => {
+    try {
+        const userCount = await User.countDocuments();
+        const missionCount = await Mission.countDocuments();
+        const galleryCount = await Gallery.countDocuments();
+        const entryCount = await Entry.countDocuments();
+        res.json({ users: userCount, missions: missionCount, gallery: galleryCount, diary: entryCount });
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET: All Users
+app.get('/api/admin/users', async (req, res) => {
+    try {
+        const users = await User.find().select('-password'); // Don't send passwords
+        res.json(users);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// DELETE: Ban User
+app.delete('/api/admin/users/:id', async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.json({ message: "User deleted" });
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// GET: All Comments
+app.get('/api/admin/comments', async (req, res) => {
+    try {
+        // Find all interactions that have comments
+        const interactions = await Interaction.find({ comments: { $not: { $size: 0 } } });
+        let allComments = [];
+        
+        interactions.forEach(doc => {
+            doc.comments.forEach(comment => {
+                allComments.push({
+                    articleId: doc.articleId,
+                    interactionId: doc._id, // Needed to delete
+                    commentId: comment._id, // Needed to delete
+                    user: comment.user,
+                    text: comment.text,
+                    date: comment.date
+                });
+            });
+        });
+        res.json(allComments);
+    } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// DELETE: Remove Comment
+app.delete('/api/admin/comments/:interactionId/:commentId', async (req, res) => {
+    try {
+        await Interaction.updateOne(
+            { _id: req.params.interactionId },
+            { $pull: { comments: { _id: req.params.commentId } } }
+        );
+        res.json({ message: "Comment deleted" });
     } catch (err) { res.status(500).json({ error: err.message }); }
 });
 

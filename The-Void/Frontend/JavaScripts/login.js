@@ -147,10 +147,16 @@ signinBtn.addEventListener('click', async (e) => {
             // Save Token
             localStorage.setItem('token', data.token);
             localStorage.setItem('username', data.username);
+            localStorage.setItem('role', data.role);
             
             // Redirect after 2 seconds so user sees the message
             setTimeout(() => {
-                window.location.href = "/The-Void/Frontend/index.html"; 
+                // Redirect Admin to Admin Panel, others to Home
+                if(data.role === 'admin') {
+                    window.location.href = "/The-Void/Frontend/Pages/admin.html";
+                    } else {
+                        window.location.href = "/The-Void/Frontend/index.html";
+                    }
             }, 2000); 
         } else {
             // ❌ ERROR (User not found / Invalid credentials)
