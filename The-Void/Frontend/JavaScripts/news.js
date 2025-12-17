@@ -125,51 +125,74 @@ async function handleLike(id, btnElement) {
 }
 
 /* --- 4. MODAL & COMMENTS --- */
-async function openModal(id) {
-    activeModalId = id;
-    const item = mockData.find(d => d.id === id);
-    const interactions = await getInteractions(id);
-    
-    document.getElementById('modal-category').textContent = item.category;
-    document.getElementById('modal-title').textContent = item.title;
-    document.getElementById('modal-content').textContent = item.content + " full story available at source.";
-    document.getElementById('modal-image').src = item.image;
-    
-    renderComments(interactions.comments);
-    updateModalLikeBtn(interactions.liked);
-    
-    document.getElementById('news-modal').classList.remove('hidden');
+/* --- CUSTOM LOGIN MODAL LOGIC --- */
+
+// Helper to show the modal
+function showLoginModal() {
+    const modal = document.getElementById('login-required-modal');
+    if(modal) modal.style.display = 'flex';
 }
 
-function closeModal() {
-    document.getElementById('news-modal').classList.add('hidden');
-    activeModalId = null;
-}
+// Setup Modal Buttons (Run once on load)
+document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('login-redirect-btn');
+    const cancelBtn = document.getElementById('login-cancel-btn');
+    const modal = document.getElementById('login-required-modal');
 
-function updateModalLikeBtn(isLiked) {
-    const btn = document.getElementById('modal-like-btn');
-    const icon = btn.querySelector('i');
-    const text = btn.querySelector('span');
-    
-    if(isLiked) {
-        btn.classList.add('liked');
-        icon.className = "fa-solid fa-heart";
-        text.textContent = "Liked";
-    } else {
-        btn.classList.remove('liked');
-        icon.className = "fa-regular fa-heart";
-        text.textContent = "Like";
+    if (loginBtn) {
+        loginBtn.onclick = () => {
+            window.location.href = "login.html"; // Redirect to Login Page
+        };
     }
+
+    if (cancelBtn) {
+        cancelBtn.onclick = () => {
+            if(modal) modal.style.display = 'none';
+        };
+    }
+});
+
+/* --- UPDATED INTERACTION FUNCTIONS --- */
+
+async function handleLike(id, btnElement) {
+    // 1. CHECK LOGIN STATUS
+    if (!currentUsername) {
+        showLoginModal(); // Show custom popup instead of alert
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/${id}/like`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: currentUsername })
+        });
+        const updatedDoc = await res.json();
+        const isLiked = updatedDoc.likes.includes(currentUsername);
+
+        // Update UI
+        if (btnElement) {
+            const icon = btnElement.querySelector('i');
+            if (isLiked) {
+                btnElement.classList.add('liked');
+                icon.className = 'fa-solid fa-heart';
+            } else {
+                btnElement.classList.remove('liked');
+                icon.className = 'fa-regular fa-heart';
+            }
+        } else {
+            updateModalLikeBtn(isLiked);
+            loadNews();
+        }
+    } catch (err) { console.error(err); }
 }
 
-function toggleModalLike() {
-    if(!activeModalId) return;
-    handleLike(activeModalId);
-}
-
-// SUBMIT COMMENT
 async function submitComment() {
-    if (!currentUsername) return alert("Please login to comment.");
+    // 1. CHECK LOGIN STATUS
+    if (!currentUsername) {
+        showLoginModal(); // Show custom popup instead of alert
+        return;
+    }
     
     const input = document.getElementById('comment-input');
     const text = input.value.trim();
@@ -188,8 +211,8 @@ async function submitComment() {
         const updatedDoc = await res.json();
         
         renderComments(updatedDoc.comments);
-        input.value = ''; // Clear input
-        loadNews(); // Update comment count on grid
+        input.value = ''; 
+        loadNews(); 
     } catch (err) { console.error(err); }
 }
 

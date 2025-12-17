@@ -236,6 +236,20 @@
   </div>
 </div>
 
+<div id="login-required-modal" class="notification-overlay" style="display: none; z-index: 20000;">
+    <div class="notification-box">
+        <h3 style="color: #00d9ff;">⚠ ACCESS DENIED ⚠</h3>
+        <p>You must be logged in to interact with the comms network.</p>
+        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+            <button id="login-cancel-btn" class="btn-secondary">Cancel</button>
+            <button id="login-redirect-btn" class="btn-primary" 
+                    style="background: linear-gradient(135deg, #00d9ff, #0077ff); box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);">
+                LOGIN NOW
+            </button>
+        </div>
+    </div>
+</div>
+
     <script src="../JavaScripts/news.js"></script>
 </body>
 </html>
