@@ -106,7 +106,6 @@ async function handleLike(id, btnElement) {
         const updatedDoc = await res.json();
         const isLiked = updatedDoc.likes.includes(currentUsername);
 
-        // Update UI immediately
         if (btnElement) {
             const icon = btnElement.querySelector('i');
             if (isLiked) {
@@ -117,7 +116,6 @@ async function handleLike(id, btnElement) {
                 icon.className = 'fa-regular fa-heart';
             }
         } else {
-            // If called from Modal, update modal button
             updateModalLikeBtn(isLiked);
             loadNews(); // Refresh grid to sync count
         }
@@ -125,15 +123,11 @@ async function handleLike(id, btnElement) {
 }
 
 /* --- 4. MODAL & COMMENTS --- */
-/* --- CUSTOM LOGIN MODAL LOGIC --- */
-
-// Helper to show the modal
 function showLoginModal() {
     const modal = document.getElementById('login-required-modal');
     if(modal) modal.style.display = 'flex';
 }
 
-// Setup Modal Buttons (Run once on load)
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('login-redirect-btn');
     const cancelBtn = document.getElementById('login-cancel-btn');
@@ -157,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function handleLike(id, btnElement) {
     // 1. CHECK LOGIN STATUS
     if (!currentUsername) {
-        showLoginModal(); // Show custom popup instead of alert
+        showLoginModal(); 
         return;
     }
 
@@ -190,7 +184,7 @@ async function handleLike(id, btnElement) {
 async function submitComment() {
     // 1. CHECK LOGIN STATUS
     if (!currentUsername) {
-        showLoginModal(); // Show custom popup instead of alert
+        showLoginModal(); 
         return;
     }
     
