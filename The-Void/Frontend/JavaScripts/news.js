@@ -123,28 +123,140 @@ async function handleLike(id, btnElement) {
 }
 
 /* --- 4. MODAL & COMMENTS --- */
-function showLoginModal() {
-    const modal = document.getElementById('login-required-modal');
-    if(modal) modal.style.display = 'flex';
+/* --- 4. MODAL & COMMENTS LOGIC --- */
+
+// 1. OPEN MODAL (Sets the activeModalId)
+async function openModal(id) {
+    activeModalId = id; // <--- THIS FIXES YOUR VARIABLE ERROR
+    const modal = document.getElementById('comment-modal');
+    
+    // Find the basic article data from your local mockData
+    const item = mockData.find(i => i.id === id); 
+
+    if (item && modal) {
+        // A. Populate visual elements (Title, Image, Text)
+        const titleEl = document.getElementById('modal-title');
+        const imgEl = document.getElementById('modal-image');
+        const descEl = document.getElementById('modal-description');
+        
+        if(titleEl) titleEl.innerText = item.title;
+        if(imgEl) imgEl.src = item.image;
+        if(descEl) descEl.innerText = item.content;
+
+        // B. Fetch live comments & likes from Database
+        const interactions = await getInteractions(id);
+        
+        // C. Render Comments
+        renderComments(interactions.comments);
+
+        // D. Update the Like button inside the modal
+        updateModalLikeBtn(interactions.liked);
+
+        // E. Show the modal
+        modal.style.display = 'flex';
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const loginBtn = document.getElementById('login-redirect-btn');
-    const cancelBtn = document.getElementById('login-cancel-btn');
-    const modal = document.getElementById('login-required-modal');
+// 2. CLOSE MODAL
+function closeModal() {
+    const modal = document.getElementById('comment-modal');
+    if(modal) modal.style.display = 'none';
+    activeModalId = null; // Reset the ID
+}
 
-    if (loginBtn) {
-        loginBtn.onclick = () => {
-            window.location.href = "login.html"; // Redirect to Login Page
-        };
+// 3. SUBMIT COMMENT
+async function submitComment() {
+    // Check Login
+    if (!currentUsername) {
+        showLoginModal();
+        return;
+    }
+    
+    // Check if we have a valid article open
+    if (!activeModalId) {
+        console.error("No active article selected");
+        return;
     }
 
-    if (cancelBtn) {
-        cancelBtn.onclick = () => {
-            if(modal) modal.style.display = 'none';
-        };
+    const input = document.getElementById('comment-input');
+    const text = input.value.trim();
+
+    if (!text) return; // Don't submit empty text
+
+    try {
+        const res = await fetch(`${API_URL}/${activeModalId}/comment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                user: currentUsername, 
+                text: text, 
+                date: new Date().toLocaleDateString() 
+            })
+        });
+        
+        const updatedDoc = await res.json();
+        
+        // Refresh comments list
+        renderComments(updatedDoc.comments || []);
+        input.value = ''; // Clear input box
+        
+        // Optional: Update the comment count on the main grid without reloading
+        loadNews(); 
+    } catch (err) { 
+        console.error("Comment failed:", err); 
     }
-});
+}
+
+// 4. HELPER: Update Like Button inside Modal
+function updateModalLikeBtn(isLiked) {
+    const btn = document.getElementById('modal-like-btn');
+    if(!btn) return;
+    
+    const icon = btn.querySelector('i');
+    if (isLiked) {
+        btn.classList.add('liked');
+        icon.className = 'fa-solid fa-heart';
+    } else {
+        btn.classList.remove('liked');
+        icon.className = 'fa-regular fa-heart';
+    }
+    
+    // Re-attach onclick with specific ID
+    btn.onclick = () => handleLike(activeModalId, null); 
+}
+
+// 5. HELPER: Render Comments List
+function renderComments(comments) {
+    const list = document.getElementById('comments-list');
+    if(!list) return;
+
+    list.innerHTML = '';
+    
+    if (!comments || comments.length === 0) {
+        list.innerHTML = '<p style="color: var(--text-gray); font-style: italic; text-align:center;">No signals received yet. Be the first to transmit.</p>';
+        return;
+    }
+
+    // Show newest comments first
+    comments.slice().reverse().forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `
+            <div class="comment-meta">
+                <span class="comment-user" style="color: #00d9ff; font-weight: bold;">${c.user}</span>
+                <span style="font-size: 0.75rem; color: #666;">${c.date}</span>
+            </div>
+            <p class="comment-text" style="color: #ddd;">${c.text}</p>
+        `;
+        list.appendChild(div);
+    });
+}
+
+// --- CRITICAL FIX: EXPOSE FUNCTIONS TO HTML ---
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.submitComment = submitComment;
+window.handleLike = handleLike;
 
 /* --- UPDATED INTERACTION FUNCTIONS --- */
 
