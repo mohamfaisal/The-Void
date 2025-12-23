@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- B. NEWS MODAL LOGIC ---
 
-// 1. OPEN MODAL
+// 1. OPEN MODAL (Instant Version)
 async function openModal(id) {
     console.log("Open Modal Clicked for ID:", id); 
 
@@ -167,14 +167,14 @@ async function openModal(id) {
         return;
     }
 
-    // Find the article in your data
+    // A. Find the local article data (Instant)
     const item = mockData.find(i => i.id === id); 
     
     if (item) {
-        // Populate visual elements
+        // B. Populate visual elements immediately
         const titleEl = document.getElementById('modal-title');
         const imgEl = document.getElementById('modal-image');
-        const descEl = document.getElementById('modal-content'); // Updated ID to match HTML
+        const descEl = document.getElementById('modal-content');
         const catEl = document.getElementById('modal-category'); 
 
         if(titleEl) titleEl.innerText = item.title;
@@ -182,17 +182,24 @@ async function openModal(id) {
         if(descEl) descEl.innerText = item.content;
         if(catEl) catEl.innerText = item.category || "News";
 
-        // Fetch interactions (comments/likes)
-        const interactions = await getInteractions(id);
-        
-        // Render Comments
-        renderComments(interactions.comments);
-
-        // Update Like Button
-        updateModalLikeBtn(interactions.liked);
-
-        // Show the modal
+        // C. Show the modal NOW (Don't wait for server!)
+        modal.classList.remove('hidden'); // Remove hidden class if present
         modal.style.display = 'flex';
+        console.log("Modal opened instantly");
+
+        // D. Show "Loading..." in comments while we fetch
+        const list = document.getElementById('comments-list');
+        if(list) list.innerHTML = '<p style="text-align:center; padding:20px; color:#00d9ff;"><i class="fa-solid fa-circle-notch fa-spin"></i> Establishing Uplink...</p>';
+
+        // E. NOW fetch the data in the background
+        try {
+            const interactions = await getInteractions(id);
+            renderComments(interactions.comments);
+            updateModalLikeBtn(interactions.liked);
+        } catch (error) {
+            console.error("Server fetch failed:", error);
+            if(list) list.innerHTML = '<p style="text-align:center; color:red;">Connection Signal Weak.</p>';
+        }
     }
 }
 
