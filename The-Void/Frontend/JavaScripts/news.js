@@ -122,19 +122,31 @@ async function handleLike(id, btnElement) {
     } catch (err) { console.error(err); }
 }
 
-/* --- 4. MODAL & COMMENTS --- */
-/* --- 4. MODAL & COMMENTS LOGIC --- */
+/* --- 4. MODAL & COMMENTS LOGIC (DEBUG VERSION) --- */
 
-// 1. OPEN MODAL (Sets the activeModalId)
+// 1. OPEN MODAL
 async function openModal(id) {
-    activeModalId = id; // <--- THIS FIXES YOUR VARIABLE ERROR
-    const modal = document.getElementById('comment-modal');
-    
-    // Find the basic article data from your local mockData
-    const item = mockData.find(i => i.id === id); 
+    console.log("Open Modal Clicked for ID:", id); // DEBUG LOG
 
-    if (item && modal) {
-        // A. Populate visual elements (Title, Image, Text)
+    activeModalId = id; 
+    
+    // IMPORTANT: Make sure this ID matches your HTML <div> ID!
+    // I changed it to 'news-modal' based on your previous code.
+    const modal = document.getElementById('news-modal'); 
+
+    if (!modal) {
+        console.error("ERROR: Could not find element with id='news-modal'");
+        return;
+    }
+
+    // Find the article in your data
+    const item = mockData.find(i => i.id === id); 
+    
+    if (item) {
+        console.log("Item found:", item.title); // DEBUG LOG
+
+        // A. Populate visual elements
+        // (Check if these IDs exist in your HTML too!)
         const titleEl = document.getElementById('modal-title');
         const imgEl = document.getElementById('modal-image');
         const descEl = document.getElementById('modal-description');
@@ -143,45 +155,48 @@ async function openModal(id) {
         if(imgEl) imgEl.src = item.image;
         if(descEl) descEl.innerText = item.content;
 
-        // B. Fetch live comments & likes from Database
+        // B. Fetch interactions
         const interactions = await getInteractions(id);
         
         // C. Render Comments
         renderComments(interactions.comments);
 
-        // D. Update the Like button inside the modal
+        // D. Update Like Button
         updateModalLikeBtn(interactions.liked);
 
         // E. Show the modal
         modal.style.display = 'flex';
+        console.log("Modal display set to Flex"); // DEBUG LOG
+    } else {
+        console.error("Error: Item not found in mockData for ID:", id);
     }
 }
 
 // 2. CLOSE MODAL
 function closeModal() {
-    const modal = document.getElementById('comment-modal');
+    const modal = document.getElementById('news-modal'); // MATCHED ID
     if(modal) modal.style.display = 'none';
-    activeModalId = null; // Reset the ID
+    activeModalId = null;
 }
 
 // 3. SUBMIT COMMENT
 async function submitComment() {
-    // Check Login
+    console.log("Submit Comment Clicked"); // DEBUG LOG
+
     if (!currentUsername) {
         showLoginModal();
         return;
     }
     
-    // Check if we have a valid article open
     if (!activeModalId) {
-        console.error("No active article selected");
+        console.error("No active article ID");
         return;
     }
 
     const input = document.getElementById('comment-input');
     const text = input.value.trim();
 
-    if (!text) return; // Don't submit empty text
+    if (!text) return; 
 
     try {
         const res = await fetch(`${API_URL}/${activeModalId}/comment`, {
@@ -195,19 +210,15 @@ async function submitComment() {
         });
         
         const updatedDoc = await res.json();
-        
-        // Refresh comments list
         renderComments(updatedDoc.comments || []);
-        input.value = ''; // Clear input box
-        
-        // Optional: Update the comment count on the main grid without reloading
+        input.value = ''; 
         loadNews(); 
     } catch (err) { 
         console.error("Comment failed:", err); 
     }
 }
 
-// 4. HELPER: Update Like Button inside Modal
+// 4. HELPER: Update Like Button
 function updateModalLikeBtn(isLiked) {
     const btn = document.getElementById('modal-like-btn');
     if(!btn) return;
@@ -221,11 +232,10 @@ function updateModalLikeBtn(isLiked) {
         icon.className = 'fa-regular fa-heart';
     }
     
-    // Re-attach onclick with specific ID
     btn.onclick = () => handleLike(activeModalId, null); 
 }
 
-// 5. HELPER: Render Comments List
+// 5. HELPER: Render Comments
 function renderComments(comments) {
     const list = document.getElementById('comments-list');
     if(!list) return;
@@ -233,11 +243,10 @@ function renderComments(comments) {
     list.innerHTML = '';
     
     if (!comments || comments.length === 0) {
-        list.innerHTML = '<p style="color: var(--text-gray); font-style: italic; text-align:center;">No signals received yet. Be the first to transmit.</p>';
+        list.innerHTML = '<p style="color: var(--text-gray); font-style: italic; text-align:center;">No signals received yet.</p>';
         return;
     }
 
-    // Show newest comments first
     comments.slice().reverse().forEach(c => {
         const div = document.createElement('div');
         div.className = 'comment-item';
@@ -252,7 +261,7 @@ function renderComments(comments) {
     });
 }
 
-// --- CRITICAL FIX: EXPOSE FUNCTIONS TO HTML ---
+// EXPOSE FUNCTIONS
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.submitComment = submitComment;
