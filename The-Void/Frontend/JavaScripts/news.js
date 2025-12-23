@@ -122,12 +122,19 @@ async function handleLike(id, btnElement) {
     } catch (err) { console.error(err); }
 }
 
-/* --- 4. MODAL & COMMENTS --- */
+/* --- 4. MODAL, COMMENTS & LOGIN LOGIC --- */
+
+// --- A. LOGIN MODAL LOGIC ---
 function showLoginModal() {
     const modal = document.getElementById('login-required-modal');
-    if(modal) modal.style.display = 'flex';
+    if(modal) {
+        modal.style.display = 'flex';
+        // Make sure it sits on top
+        modal.style.zIndex = '20000'; 
+    }
 }
 
+// Login Modal Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('login-redirect-btn');
     const cancelBtn = document.getElementById('login-cancel-btn');
@@ -135,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginBtn) {
         loginBtn.onclick = () => {
-            window.location.href = "login.html"; // Redirect to Login Page
+            window.location.href = "login.html"; 
         };
     }
 
@@ -145,6 +152,141 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 });
+
+// --- B. NEWS MODAL LOGIC ---
+
+// 1. OPEN MODAL
+async function openModal(id) {
+    console.log("Open Modal Clicked for ID:", id); 
+
+    activeModalId = id; 
+    const modal = document.getElementById('news-modal'); 
+
+    if (!modal) {
+        console.error("ERROR: Could not find element with id='news-modal'");
+        return;
+    }
+
+    // Find the article in your data
+    const item = mockData.find(i => i.id === id); 
+    
+    if (item) {
+        // Populate visual elements
+        const titleEl = document.getElementById('modal-title');
+        const imgEl = document.getElementById('modal-image');
+        const descEl = document.getElementById('modal-content'); // Updated ID to match HTML
+        const catEl = document.getElementById('modal-category'); 
+
+        if(titleEl) titleEl.innerText = item.title;
+        if(imgEl) imgEl.src = item.image;
+        if(descEl) descEl.innerText = item.content;
+        if(catEl) catEl.innerText = item.category || "News";
+
+        // Fetch interactions (comments/likes)
+        const interactions = await getInteractions(id);
+        
+        // Render Comments
+        renderComments(interactions.comments);
+
+        // Update Like Button
+        updateModalLikeBtn(interactions.liked);
+
+        // Show the modal
+        modal.style.display = 'flex';
+    }
+}
+
+// 2. CLOSE MODAL
+function closeModal() {
+    const modal = document.getElementById('news-modal');
+    if(modal) modal.style.display = 'none';
+    activeModalId = null;
+}
+
+// 3. SUBMIT COMMENT
+async function submitComment() {
+    if (!currentUsername) {
+        showLoginModal();
+        return;
+    }
+    
+    if (!activeModalId) return;
+
+    const input = document.getElementById('comment-input');
+    const text = input.value.trim();
+
+    if (!text) return; 
+
+    try {
+        const res = await fetch(`${API_URL}/${activeModalId}/comment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                user: currentUsername, 
+                text: text, 
+                date: new Date().toLocaleDateString() 
+            })
+        });
+        
+        const updatedDoc = await res.json();
+        renderComments(updatedDoc.comments || []);
+        input.value = ''; 
+        loadNews(); // Refresh grid counts
+    } catch (err) { 
+        console.error("Comment failed:", err); 
+    }
+}
+
+// 4. HELPER: Update Like Button
+function updateModalLikeBtn(isLiked) {
+    const btn = document.getElementById('modal-like-btn');
+    if(!btn) return;
+    
+    const icon = btn.querySelector('i');
+    if (isLiked) {
+        btn.classList.add('liked');
+        icon.className = 'fa-solid fa-heart';
+    } else {
+        btn.classList.remove('liked');
+        icon.className = 'fa-regular fa-heart';
+    }
+    
+    // Allow clicking the heart inside the modal
+    btn.onclick = () => handleLike(activeModalId, null); 
+}
+
+// 5. HELPER: Render Comments
+function renderComments(comments) {
+    const list = document.getElementById('comments-list');
+    if(!list) return;
+
+    list.innerHTML = '';
+    
+    if (!comments || comments.length === 0) {
+        list.innerHTML = '<p style="color: var(--text-gray); font-style: italic; text-align:center;">No signals received yet.</p>';
+        return;
+    }
+
+    comments.slice().reverse().forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `
+            <div class="comment-meta">
+                <span class="comment-user" style="color: #00d9ff; font-weight: bold;">${c.user}</span>
+                <span style="font-size: 0.75rem; color: #666;">${c.date}</span>
+            </div>
+            <p class="comment-text" style="color: #ddd;">${c.text}</p>
+        `;
+        list.appendChild(div);
+    });
+}
+
+// --- CRITICAL: MAKE FUNCTIONS VISIBLE TO HTML ---
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.submitComment = submitComment;
+window.handleLike = handleLike;
+window.showLoginModal = showLoginModal;
 
 /* --- UPDATED INTERACTION FUNCTIONS --- */
 
