@@ -46,4 +46,4 @@ Make sure you have Node.js and npm (or yarn/pnpm) installed on your machine.
    git clone [https://github.com/mohamfaisal/The-Void.git](https://github.com/mohamfaisal/The-Void.git)
 
 ## 👨‍💻 Author
-Mohammed Faisal, GitHub: @mohamfaisal
+**Mohammed Faisal**, GitHub: @mohamfaisal
